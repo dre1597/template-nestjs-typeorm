@@ -1,0 +1,41 @@
+services:
+  template-postgres:
+    env_file:
+      - .env
+    image: postgres:16
+    ports:
+      - ${DATABASE_PORT:-5432}:${DATABASE_PORT:-5432}
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DATABASE_USER:-postgres}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-postgres}
+      POSTGRES_DB: ${DATABASE_NAME:-template}
+    command: -p ${DATABASE_PORT:-5432}
+    networks:
+      - template
+
+  template-postgres-test:
+    env_file:
+      - .env
+    image: postgres:16
+    ports:
+      - ${DATABASE_PORT_TEST:-15432}:${DATABASE_PORT_TEST:-15432}
+    volumes:
+      - data-postgres-test:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DATABASE_USER_TEST:-postgres}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD_TEST:-postgres}
+      POSTGRES_DB: ${DATABASE_NAME_TEST:-template_test}
+    command: -p ${DATABASE_PORT_TEST:-15432}
+    networks:
+      - template
+
+volumes:
+  data-postgres:
+    driver: local
+  data-postgres-test:
+    driver: local
+
+networks:
+  template:
