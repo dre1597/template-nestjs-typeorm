@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
+import { generateDocumentation } from './helpers/generate-documentation';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,13 +11,16 @@ async function bootstrap() {
   const config = app.get<ConfigService>(ConfigService);
 
   const port = config.get<number>('api.port');
-  const apiUrl = config.get<string>('api.apiUrl');
   const nodeEnv = config.get<string>('api.nodeEnv');
 
   app.enableCors();
 
+  if (nodeEnv !== 'production') {
+    generateDocumentation(app);
+  }
+
   await app.listen(port, () => {
-    logger.log(`Server listening at ${apiUrl}:${port}`);
+    logger.log(`Server listening at port ${port}`);
     logger.log(`Running in mode: ${nodeEnv}`);
   });
 }
