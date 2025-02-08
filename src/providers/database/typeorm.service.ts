@@ -1,6 +1,6 @@
-import { DataSource } from 'typeorm';
-import { ConfigService } from '@nestjs/config';
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { DataSource } from 'typeorm';
 
 @Injectable()
 export class TypeormService implements OnModuleInit {

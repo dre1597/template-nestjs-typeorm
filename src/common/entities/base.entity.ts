@@ -1,8 +1,8 @@
 import {
-  BaseEntity as TypeBaseEntity,
   CreateDateColumn,
   DeleteDateColumn,
   PrimaryGeneratedColumn,
+  BaseEntity as TypeBaseEntity,
   UpdateDateColumn,
 } from 'typeorm';
 

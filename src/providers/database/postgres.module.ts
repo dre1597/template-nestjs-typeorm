@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { TypeormService } from './typeorm.service';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { CustomConfigModule } from '../../config/custom-config.module';
+import { TypeormService } from './typeorm.service';
 
 @Module({
   imports: [
